@@ -6,6 +6,7 @@ node
  git branch: 'development', credentialsId: 'Arunkumarareti', url: 'https://github.com/aparnaaltius/maven-web-application.git'
  }
  
+ /*
  stage('Build')
  {
  sh "${mavenHome}/bin/mvn clean package"
@@ -30,5 +31,6 @@ stage('SendEmailNotification')
 
 AretiArunKumar
 8639379433''', subject: 'build', to: 'arunkumarareti103@gmail.com'
-}
+} 
+*/
 }
