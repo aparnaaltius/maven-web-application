@@ -99,13 +99,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>arun Releases Nexus Repository</name>
-	      <url>http://3.145.62.175:8081/repository/web-release/</url>
+	      <url>http://18.117.185.54:8081/repository/facebook-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>arunSnapshot Nexus Repository </name>
-	      <url>http://3.145.62.175:8081/repository/web-snapshot/</url>
+	      <url>http://18.117.185.54:8081/repository/facebook-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
