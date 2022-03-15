@@ -1,0 +1,50 @@
+pipeline
+{
+    //masterinstance agent as defualt 
+    //agent any for defualt 
+    agent {
+        label 'master'}
+        options {
+ 
+  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '5')
+}
+        tools {
+  maven 'maven3.8.4'
+}
+
+    stages
+    {
+        //get the code info from github
+        stage ('checkout'){
+            steps{
+                git branch: 'development', credentialsId: 'Arunkumarareti', url: 'https://github.com/aparnaaltius/maven-web-application.git'
+            }//closing step
+        }//closing stage
+       stage('build') {
+  steps {
+    sh "mvn clean package"
+  }//closing steps 
+}//closing stage 
+//excute sonarcube report 
+stage('sonar cube report'){
+steps{
+    sh "mvn clean sonar:sonar"
+}//closing steps
+}//closing stage 
+//upload artifacts into nexus
+stage('upload artifacts'){
+    steps{
+        sh "mvn clean deploy"
+    }//closing steps
+}//closing stage 
+//deploy the application into tomcat server 
+stage('deploy app to tomcat'){
+steps{
+sshagent(['41a7fa06-10f6-4459-8db7-7892b5793e3c']) {
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@18.118.27.121:/opt/apache-tomcat-9.0.59/webapps/"
+}//closing steps 
+}
+}//closing stage 
+
+    }//closing stages
+}//closing pipeline
